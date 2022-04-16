@@ -56,7 +56,7 @@ class Matrix {
     Matrix& ClearMatrix();
     Matrix& RandomMatrix(int size, int dist, int cnt = -1, int seed = 0);
     bool operator==(Matrix Tmp);
-    bool operator!=(Matrix Tmp) { return !(*this == Tmp); }
+    bool operator!=(const Matrix& Tmp) { return !(*this == Tmp); }
     Matrix T();
     Matrix operator*(Matrix B);
     ~Matrix();
