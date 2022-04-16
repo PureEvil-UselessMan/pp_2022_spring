@@ -1,26 +1,29 @@
 // Copyright 2022 Olynin Alexander
-#ifndef MODULES_TASK_1_OLYNIN_A_MULT_SPARSE_CC_COMPLEX_MAT_H_
-#define MODULES_TASK_1_OLYNIN_A_MULT_SPARSE_CC_COMPLEX_MAT_H_
+#ifndef MODULES_TASK_1_OLYNIN_A_MULT_SPARSE_CC_COMPLEX_MAT_MULT_SPARSE_CC_COMPLEX_MAT_H_
+#define MODULES_TASK_1_OLYNIN_A_MULT_SPARSE_CC_COMPLEX_MAT_MULT_SPARSE_CC_COMPLEX_MAT_H_
 
+#include <time.h>
 #include <random>
 #include <vector>
-#include <time.h>
 
 class Complex {
-private:
+ private:
     double rl;
     double im;
-public:
-    Complex(double _rl = 0, double _im = 0): rl(_rl), im(_im) {}
+ public:
+    explicit Complex(double _rl = 0, double _im = 0): rl(_rl), im(_im) {}
     Complex(const Complex& Tmp): rl(Tmp.rl), im(Tmp.im) {}
     Complex& operator=(Complex Tmp);
-    std::vector<Complex> InitVec(std::vector<double> rls = std::vector<double>(),
-                                 std::vector<double> ims = std::vector<double>());
+    std::vector<Complex> InitVec(std::vector<double> rls =
+                                 std::vector<double>(),
+                                 std::vector<double> ims =
+                                 std::vector<double>());
     double GetRl() { return this->rl; }
     double GetIm() { return this->im; }
     void SetRl(double tmp) { this->rl = tmp; }
     void SetIm(double tmp) { this->im = tmp; }
     Complex operator+(Complex Tmp);
+    Complex& operator+=(Complex Tmp);
     Complex operator*(Complex Tmp);
     bool operator==(Complex Tmp);
     bool operator!=(Complex Tmp) { return !(*this == Tmp); }
@@ -29,20 +32,22 @@ public:
 };
 
 class Matrix {
-private:
+ private:
     int size;
     int non;
     std::vector<Complex> Entry;
     std::vector<int> irows;
     std::vector<int> shtcols;
-public:
-    Matrix(int _size = 0, int _non = 0, std::vector<Complex> _Entry = std::vector<Complex>(),
-           std::vector<int> _irows = std::vector<int>(), std::vector<int> _shtcols =
-           std::vector<int>()): size(_size), non(_non), Entry(_Entry), irows(_irows),
-           shtcols(_shtcols) {}
+
+ public:
+    Matrix(int _size = 0, int _non = 0, const std::vector<Complex>& _Entry =
+           std::vector<Complex>(), const std::vector<int>& _irows =
+           std::vector<int>(), const std::vector<int>& _shtcols =
+           std::vector<int>()): size(_size), non(_non), Entry(_Entry),
+           irows(_irows), shtcols(_shtcols) {}
     Matrix(const Matrix& Tmp): size(Tmp.size), non(Tmp.non), Entry(Tmp.Entry),
                                irows(Tmp.irows), shtcols(Tmp.shtcols) {}
-    Matrix& operator=(Matrix Tmp);
+    Matrix& operator=(const Matrix& Tmp);
     int GetSize() { return this->size; }
     int GetNon() { return this-> non; }
     std::vector<Complex> GetEntry() { return this->Entry; }
@@ -57,4 +62,4 @@ public:
     ~Matrix();
 };
 
-#endif  // MODULES_TASK_1_OLYNIN_A_SPARSE_CC_COMPLEX_MAT_H_
+#endif  // MODULES_TASK_1_OLYNIN_A_MULT_SPARSE_CC_COMPLEX_MAT_MULT_SPARSE_CC_COMPLEX_MAT_H_

@@ -1,7 +1,7 @@
 // Copyright 2022 Olynin Alexander
 #include <gtest/gtest.h>
-#include <vector>
 #include <time.h>
+#include <vector>
 #include "../../modules/task_1/olynin_a_mult_sparse_cc_complex_mat/mult_sparse_cc_complex_mat.h"
 
 TEST(Class_Complex, Complex_creation) {
@@ -80,9 +80,7 @@ TEST(Class_Matrix, Sparse_matrix_transposition) {
     * 9  0  15  16
     *
     */
-
-   A = A.T();
-
+    A = A.T();
     /*
     * Matrix A.T should be
     *
@@ -212,7 +210,8 @@ TEST(Class_Matrix, Sparse_matrix_multiplication_complex) {
     */
 
     std::vector<Complex> EntRes;
-    EntRes = Tmp.InitVec({ -24, 10, -4, -180, -164 }, { 128, 88, 28, 452, 220 });
+    EntRes = Tmp.InitVec({ -24, 10, -4, -180, -164 },
+                         { 128, 88, 28, 452, 220 });
     std::vector<int> irows_res = { 4, 1, 4, 1, 1 };
     std::vector<int> shtcol_res = { 1, 2, 4, 5, 6 };
     Matrix Res(size, non, EntRes, irows_res, shtcol_res);
@@ -254,24 +253,26 @@ TEST(Class_Matrix, Sparse_matrix_multiplication_complex_meduim) {
     EXPECT_NO_THROW(A * B);
 }
 
-// TEST(Class_Matrix, Sparse_matrix_multiplication_complex_large) {
-//     clock_t start, end;
-//     int size = 2000;
-//     int dist = 100;
-//     int cnt = 10;
-//     Matrix A;
-//     start = clock();
-//     A.RandomMatrix(size, dist, cnt, 0);
-//     Matrix B;
-//     B.RandomMatrix(size, dist, cnt, 1);
-//     end = clock();
-//     std::cout << "Spended time -> " << (end - start + .0) / CLOCKS_PER_SEC << " <-" << std::endl;
-//     EXPECT_NO_THROW(A * B);
+TEST(Class_Matrix, Sparse_matrix_multiplication_complex_large) {
+    clock_t start, end;
+    int size = 2000;
+    int dist = 100;
+    int cnt = 10;
+    Matrix A;
+    start = clock();
+    A.RandomMatrix(size, dist, cnt, 0);
+    Matrix B;
+    B.RandomMatrix(size, dist, cnt, 1);
+    end = clock();
+    std::cout << "Spended time -> " << (end - start + .0) / CLOCKS_PER_SEC
+    << " <-" << std::endl;
+    EXPECT_NO_THROW(A * B);
 
-//     start = clock();
+    start = clock();
 
-//     A * B;
+    A * B;
 
-//     end = clock();
-//     std::cout << "Spended time -> " << (end - start + .0) / CLOCKS_PER_SEC << " <-" << std::endl;
-// }
+    end = clock();
+    std::cout << "Spended time -> " << (end - start + .0) / CLOCKS_PER_SEC
+    << " <-" << std::endl;
+}

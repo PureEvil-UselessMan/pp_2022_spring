@@ -5,11 +5,11 @@ std::vector<Complex> Complex::InitVec(std::vector<double> rls,
                                       std::vector<double> ims) {
     std::vector<Complex> Ent(rls.size());
     if (rls.size() == ims.size()) {
-        for (int i = 0; i < rls.size(); i++) {
+        for (size_t i = 0; i < rls.size(); i++) {
             Ent[i] = Complex(rls[i], ims[i]);
         }
     } else {
-        for (int i = 0; i < rls.size(); i++) {
+        for (size_t i = 0; i < rls.size(); i++) {
             Ent[i] = Complex(rls[i], 0);
         }
     }
@@ -32,6 +32,11 @@ Complex Complex::operator+(Complex Tmp) {
     Ans.im = this->im + Tmp.im;
     return Ans;
 }
+Complex& Complex::operator+=(Complex Tmp) {
+    this->rl += Tmp.rl;
+    this->im += Tmp.im;
+    return *this;
+}
 bool Complex::operator==(Complex Tmp) {
     if ((this->rl - Tmp.rl < 0.00001) && (this->im - Tmp.im < 0.00001)) {
         return true;
@@ -39,7 +44,7 @@ bool Complex::operator==(Complex Tmp) {
         return false;
     }
 }
-bool Complex::IsNotZero(){
+bool Complex::IsNotZero() {
     bool ans = false;
     const double ZeroLike = 0.000001;
     if ((fabs(this->rl) > ZeroLike) || (fabs(this->im) > ZeroLike)) {
@@ -47,8 +52,7 @@ bool Complex::IsNotZero(){
     }
     return ans;
 }
-
-Matrix& Matrix::operator=(Matrix Tmp) {
+Matrix& Matrix::operator=(const Matrix& Tmp) {
     this->size = Tmp.size;
     this->non = Tmp.non;
     this->Entry = Tmp.Entry;
@@ -72,7 +76,7 @@ Matrix& Matrix::RandomMatrix(int size, int dist, int cnt, int seed) {
     std::mt19937 gen(time(0));
     gen.seed(seed);
     if (cnt < 0) {
-        cnt = (int)(size * 0.01);
+        cnt = static_cast<int>(size * 0.01);
     }
     this->non = cnt * size;
     this->Entry.resize(cnt * size);
@@ -184,7 +188,7 @@ Matrix Matrix::operator*(Matrix B) {
             for (int k = A.shtcols[i]; k < A.shtcols[i+1]; k++) {
                 int p = ip[A.irows[k-1]-1];
                 if (p) {
-                    Sum = Sum + B.Entry[p-1] * A.Entry[k-1];
+                    Sum += B.Entry[p-1] * A.Entry[k-1];
                 }
             }
             if (Sum.IsNotZero()) {
