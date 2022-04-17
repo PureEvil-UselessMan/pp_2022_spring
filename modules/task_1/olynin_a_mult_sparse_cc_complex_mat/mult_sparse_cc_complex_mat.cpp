@@ -199,7 +199,7 @@ Matrix Matrix::operator*(Matrix B) {
         }
         shtcol_res.push_back(non_counter);
     }
-    Matrix Ans(A.size, A.non, EntRes, irows_res, shtcol_res);
+    Matrix Ans(A.size, non_counter-1, EntRes, irows_res, shtcol_res);
     return Ans;
 }
 Matrix::~Matrix() {

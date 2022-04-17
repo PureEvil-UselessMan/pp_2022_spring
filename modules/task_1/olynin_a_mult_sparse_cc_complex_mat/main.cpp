@@ -154,7 +154,7 @@ TEST(Class_Matrix, Sparse_matrix_multiplication_onlyreal) {
     EntRes = Tmp.InitVec({ 24, 63, 9, 24, 32, 60, 35, 80 });
     std::vector<int> irows_res = { 2, 4, 4, 1, 2, 4, 1, 4 };
     std::vector<int> shtcol_res = { 1, 3, 4, 7, 9 };
-    Matrix Res(size, non, EntRes, irows_res, shtcol_res);
+    Matrix Res(size, EntRes.size(), EntRes, irows_res, shtcol_res);
 
     EXPECT_TRUE(C == Res);
 }
@@ -214,7 +214,7 @@ TEST(Class_Matrix, Sparse_matrix_multiplication_complex) {
                          { 128, 88, 28, 452, 220 });
     std::vector<int> irows_res = { 4, 1, 4, 1, 1 };
     std::vector<int> shtcol_res = { 1, 2, 4, 5, 6 };
-    Matrix Res(size, non, EntRes, irows_res, shtcol_res);
+    Matrix Res(size, EntRes.size(), EntRes, irows_res, shtcol_res);
 
     EXPECT_TRUE(C == Res);
 }
@@ -253,26 +253,26 @@ TEST(Class_Matrix, Sparse_matrix_multiplication_complex_meduim) {
     EXPECT_NO_THROW(A * B);
 }
 
-TEST(Class_Matrix, Sparse_matrix_multiplication_complex_large) {
-    clock_t start, end;
-    int size = 2000;
-    int dist = 100;
-    int cnt = 10;
-    Matrix A;
-    start = clock();
-    A.RandomMatrix(size, dist, cnt, 0);
-    Matrix B;
-    B.RandomMatrix(size, dist, cnt, 1);
-    end = clock();
-    std::cout << "Spended time -> " << (end - start + .0) / CLOCKS_PER_SEC
-    << " <-" << std::endl;
-    EXPECT_NO_THROW(A * B);
+// TEST(Class_Matrix, Sparse_matrix_multiplication_complex_large) {
+//     clock_t start, end;
+//     int size = 2000;
+//     int dist = 100;
+//     int cnt = 10;
+//     Matrix A;
+//     start = clock();
+//     A.RandomMatrix(size, dist, cnt, 0);
+//     Matrix B;
+//     B.RandomMatrix(size, dist, cnt, 1);
+//     end = clock();
+//     std::cout << "Spended time -> " << (end - start + .0) / CLOCKS_PER_SEC
+//     << " <-" << std::endl;
+//     EXPECT_NO_THROW(A * B);
 
-    start = clock();
+//     start = clock();
 
-    A * B;
+//     A * B;
 
-    end = clock();
-    std::cout << "Spended time -> " << (end - start + .0) / CLOCKS_PER_SEC
-    << " <-" << std::endl;
-}
+//     end = clock();
+//     std::cout << "Spended time -> " << (end - start + .0) / CLOCKS_PER_SEC
+//     << " <-" << std::endl;
+// }
