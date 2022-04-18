@@ -1,5 +1,5 @@
 // Copyright 2022 Olynin Alexander
-#include "omp.h"
+#include <omp.h>
 #include "../../modules/task_2/olynin_a_mult_sparse_cc_complex_mat/mult_sparse_cc_complex_mat.h"
 
 std::vector<Complex> Complex::InitVec(std::vector<double> rls,
@@ -192,7 +192,6 @@ Matrix Matrix::operator^(Matrix B) {
                 if (p) {
                     Sum += B.Entry[p-1] * A.Entry[k-1];
                 }
-
             }
             if (Sum.IsNotZero()) {
                     irows_res.push_back(i+1);
@@ -218,8 +217,7 @@ Matrix Matrix::operator*(Matrix B) {
     }
     std::vector<std::vector<Complex>> Entry_shared(num_threads);
     std::vector<std::vector<int>> irows_shared(num_threads);
-
-    std::vector<int> counter (A.size);
+    std::vector<int> counter(A.size);
     #pragma omp parallel num_threads(num_threads)
     {
         std::vector<Complex> Entry_private;
@@ -227,7 +225,7 @@ Matrix Matrix::operator*(Matrix B) {
         int ind = omp_get_thread_num();
         #pragma omp for
         for (int j = 0; j < B.size; j++) {
-            std::vector<int> ip (A.size, 0);
+            std::vector<int> ip(A.size, 0);
             int non_counter = 0;
             for (int i = B.shtcols[j]; i < B.shtcols[j+1]; i++) {
                 int irow = B.irows[i-1];
@@ -256,8 +254,10 @@ Matrix Matrix::operator*(Matrix B) {
     std::vector<Complex> EntryRes;
     std::vector<int> irowsres;
     for (int i = 0; i < num_threads; i++) {
-        EntryRes.insert(EntryRes.end(), Entry_shared[i].begin(), Entry_shared[i].end());
-        irowsres.insert(irowsres.end(), irows_shared[i].begin(), irows_shared[i].end());
+        EntryRes.insert(EntryRes.end(),
+                        Entry_shared[i].begin(), Entry_shared[i].end());
+        irowsres.insert(irowsres.end(),
+                        irows_shared[i].begin(), irows_shared[i].end());
     }
     std::vector<int> shtcolsres = { 1 };
     int sum = 1;

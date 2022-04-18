@@ -1,8 +1,8 @@
 // Copyright 2022 Olynin Alexander
 #include <gtest/gtest.h>
 #include <time.h>
+#include <omp.h>
 #include <vector>
-#include "omp.h"
 #include "../../modules/task_2/olynin_a_mult_sparse_cc_complex_mat/mult_sparse_cc_complex_mat.h"
 
 TEST(Class_Complex, Complex_creation) {
@@ -244,7 +244,7 @@ TEST(Class_Matrix, Sparse_matrix_multiplication_complex_small) {
     EXPECT_TRUE(C_seq == C_par);
 }
 
-TEST(Class_Matrix, Sparse_matrix_multiplication_complex_meduim_with_time_perfomance) {
+TEST(Class_Matrix, Sparse_matrix_mult_complex_meduim_time_perfomance) {
     double start, end;
     double seq_time, omp_time;
     int size = 500;
@@ -272,35 +272,7 @@ TEST(Class_Matrix, Sparse_matrix_multiplication_complex_meduim_with_time_perfoma
     EXPECT_TRUE(C_seq == C_omp);
 }
 
-TEST(Class_Matrix, Sparse_matrix_multiplication_complex_meduim_with_time_perfomance) {
-    double start, end;
-    double seq_time, omp_time;
-    int size = 500;
-    int dist = 1000;
-    int cnt = 5;
-    Matrix A;
-    A.RandomMatrix(size, dist, cnt, 0);
-    Matrix B;
-    B.RandomMatrix(size, dist, cnt, 1);
-    start = omp_get_wtime();
-    Matrix C_seq = A ^ B;
-    end = omp_get_wtime();
-    std::cout << "SEQ Spended time -> " << end - start + .0
-              << " <- seconds" << std::endl;
-    seq_time = end - start + .0;
-
-    start = omp_get_wtime();
-    Matrix C_omp = A * B;
-    end = omp_get_wtime();
-    std::cout << "OMP Spended time -> " << end - start + .0
-              << " <- seconds" << std::endl;
-    omp_time = end - start + .0;
-    std::cout << "Performance improvement by -| " << seq_time / omp_time
-              << " |- times" << std::endl;
-    EXPECT_TRUE(C_seq == C_omp);
-}
-
-// TEST(Class_Matrix, Sparse_matrix_multiplication_complex_large_with_time_perfomance) {
+// TEST(Class_Matrix, Sparse_matrix_mult_complex_large_time_perfomance) {
 //     double start, end;
 //     double seq_time, omp_time;
 //     int size = 1000;
@@ -328,7 +300,7 @@ TEST(Class_Matrix, Sparse_matrix_multiplication_complex_meduim_with_time_perfoma
 //     EXPECT_TRUE(C_seq == C_omp);
 // }
 
-// TEST(Class_Matrix, Sparse_matrix_multiplication_complex_extremely_large_with_time_perfomance) {
+// TEST(Class_Matrix, Sparse_matrix_mult_complex_ext_large_time_perfomance) {
 //     double start, end;
 //     double seq_time, omp_time;
 //     int size = 2500;
