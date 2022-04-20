@@ -218,7 +218,7 @@ Matrix Matrix::operator*(Matrix B) {
     if (grainsize == 0) {
         grainsize = 1;
     }
-    tbb:parallel_for(tbb::blocked_range<int>(0, B.size, grainsize),
+    parallel_for(tbb::blocked_range<int>(0, B.size, grainsize),
                      [&](const tbb::blocked_range<int>& range) {
         for (int j = range.begin(); j < range.end(); j++) {
             std::vector<int> ip(A.size, 0);
