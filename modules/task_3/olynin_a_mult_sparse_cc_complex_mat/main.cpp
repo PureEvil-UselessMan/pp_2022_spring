@@ -243,86 +243,86 @@ TEST(Class_Matrix, Sparse_matrix_multiplication_complex_small) {
     EXPECT_TRUE(C_seq == C_par);
 }
 
-TEST(Class_Matrix, Sparse_matrix_mult_complex_meduim_time_perfomance) {
-    clock_t start, end;
-    double seq_time, tbb_time;
-    int size = 500;
-    int dist = 1000;
-    int cnt = 5;
-    Matrix A;
-    A.RandomMatrix(size, dist, cnt, 0);
-    Matrix B;
-    B.RandomMatrix(size, dist, cnt, 1);
-    start = clock();
-    Matrix C_seq = A ^ B;
-    end = clock();
-    std::cout << "SEQ Spended time -> " << (end - start + .0) / CLOCKS_PER_SEC
-              << " <- seconds" << std::endl;
-    seq_time = (end - start + .0) / CLOCKS_PER_SEC;
+// TEST(Class_Matrix, Sparse_matrix_mult_complex_meduim_time_perfomance) {
+//     clock_t start, end;
+//     double seq_time, tbb_time;
+//     int size = 500;
+//     int dist = 1000;
+//     int cnt = 5;
+//     Matrix A;
+//     A.RandomMatrix(size, dist, cnt, 0);
+//     Matrix B;
+//     B.RandomMatrix(size, dist, cnt, 1);
+//     start = clock();
+//     Matrix C_seq = A ^ B;
+//     end = clock();
+//     std::cout << "SEQ Spended time -> " << (end - start + .0) / CLOCKS_PER_SEC
+//               << " <- seconds" << std::endl;
+//     seq_time = (end - start + .0) / CLOCKS_PER_SEC;
 
-    start = clock();
-    Matrix C_tbb = A * B;
-    end = clock();
-    std::cout << "TBB Spended time -> " << (end - start + .0) / CLOCKS_PER_SEC
-              << " <- seconds" << std::endl;
-    tbb_time = (end - start + .0) / CLOCKS_PER_SEC;
-    std::cout << "Performance improvement by -| " << seq_time / tbb_time
-              << " |- times" << std::endl;
-    EXPECT_TRUE(C_seq == C_tbb);
-}
+//     start = clock();
+//     Matrix C_tbb = A * B;
+//     end = clock();
+//     std::cout << "TBB Spended time -> " << (end - start + .0) / CLOCKS_PER_SEC
+//               << " <- seconds" << std::endl;
+//     tbb_time = (end - start + .0) / CLOCKS_PER_SEC;
+//     std::cout << "Performance improvement by -| " << seq_time / tbb_time
+//               << " |- times" << std::endl;
+//     EXPECT_TRUE(C_seq == C_tbb);
+// }
 
-TEST(Class_Matrix, Sparse_matrix_mult_complex_large_time_perfomance) {
-    clock_t start, end;
-    double seq_time, tbb_time;
-    int size = 1000;
-    int dist = 1000;
-    int cnt = 10;
-    Matrix A;
-    A.RandomMatrix(size, dist, cnt, 0);
-    Matrix B;
-    B.RandomMatrix(size, dist, cnt, 1);
-    start = clock();
-    Matrix C_seq = A ^ B;
-    end = clock();
-    std::cout << "SEQ Spended time -> " << (end - start + .0) / CLOCKS_PER_SEC
-              << " <- seconds" << std::endl;
-    seq_time = (end - start + .0) / CLOCKS_PER_SEC;
+// TEST(Class_Matrix, Sparse_matrix_mult_complex_large_time_perfomance) {
+//     clock_t start, end;
+//     double seq_time, tbb_time;
+//     int size = 1000;
+//     int dist = 1000;
+//     int cnt = 10;
+//     Matrix A;
+//     A.RandomMatrix(size, dist, cnt, 0);
+//     Matrix B;
+//     B.RandomMatrix(size, dist, cnt, 1);
+//     start = clock();
+//     Matrix C_seq = A ^ B;
+//     end = clock();
+//     std::cout << "SEQ Spended time -> " << (end - start + .0) / CLOCKS_PER_SEC
+//               << " <- seconds" << std::endl;
+//     seq_time = (end - start + .0) / CLOCKS_PER_SEC;
 
-    start = clock();
-    Matrix C_tbb = A * B;
-    end = clock();
-    std::cout << "TBB Spended time -> " << (end - start + .0) / CLOCKS_PER_SEC
-              << " <- seconds" << std::endl;
-    tbb_time = (end - start + .0) / CLOCKS_PER_SEC;
-    std::cout << "Performance improvement by -| " << seq_time / tbb_time
-              << " |- times" << std::endl;
-    EXPECT_TRUE(C_seq == C_tbb);
-}
+//     start = clock();
+//     Matrix C_tbb = A * B;
+//     end = clock();
+//     std::cout << "TBB Spended time -> " << (end - start + .0) / CLOCKS_PER_SEC
+//               << " <- seconds" << std::endl;
+//     tbb_time = (end - start + .0) / CLOCKS_PER_SEC;
+//     std::cout << "Performance improvement by -| " << seq_time / tbb_time
+//               << " |- times" << std::endl;
+//     EXPECT_TRUE(C_seq == C_tbb);
+// }
 
-TEST(Class_Matrix, Sparse_matrix_mult_complex_ext_large_time_perfomance) {
-    clock_t start, end;
-    double seq_time, tbb_time;
-    int size = 2500;
-    int dist = 100000;
-    int cnt = 25;
-    Matrix A;
-    A.RandomMatrix(size, dist, cnt, 0);
-    Matrix B;
-    B.RandomMatrix(size, dist, cnt, 1);
-    start = clock();
-    Matrix C_seq = A ^ B;
-    end = clock();
-    std::cout << "SEQ Spended time -> " << (end - start + .0) / CLOCKS_PER_SEC
-              << " <- seconds" << std::endl;
-    seq_time = (end - start + .0) / CLOCKS_PER_SEC;
+// TEST(Class_Matrix, Sparse_matrix_mult_complex_ext_large_time_perfomance) {
+//     clock_t start, end;
+//     double seq_time, tbb_time;
+//     int size = 2500;
+//     int dist = 100000;
+//     int cnt = 25;
+//     Matrix A;
+//     A.RandomMatrix(size, dist, cnt, 0);
+//     Matrix B;
+//     B.RandomMatrix(size, dist, cnt, 1);
+//     start = clock();
+//     Matrix C_seq = A ^ B;
+//     end = clock();
+//     std::cout << "SEQ Spended time -> " << (end - start + .0) / CLOCKS_PER_SEC
+//               << " <- seconds" << std::endl;
+//     seq_time = (end - start + .0) / CLOCKS_PER_SEC;
 
-    start = clock();
-    Matrix C_tbb = A * B;
-    end = clock();
-    std::cout << "TBB Spended time -> " << (end - start + .0) / CLOCKS_PER_SEC
-              << " <- seconds" << std::endl;
-    tbb_time = (end - start + .0) / CLOCKS_PER_SEC;
-    std::cout << "Performance improvement by -| " << seq_time / tbb_time
-              << " |- times" << std::endl;
-    EXPECT_TRUE(C_seq == C_tbb);
-}
+//     start = clock();
+//     Matrix C_tbb = A * B;
+//     end = clock();
+//     std::cout << "TBB Spended time -> " << (end - start + .0) / CLOCKS_PER_SEC
+//               << " <- seconds" << std::endl;
+//     tbb_time = (end - start + .0) / CLOCKS_PER_SEC;
+//     std::cout << "Performance improvement by -| " << seq_time / tbb_time
+//               << " |- times" << std::endl;
+//     EXPECT_TRUE(C_seq == C_tbb);
+// }
