@@ -271,7 +271,7 @@ TEST(Class_Matrix, Sparse_matrix_mult_complex_meduim_time_perfomance) {
     EXPECT_TRUE(C_seq == C_std);
 }
 
-TEST(Class_Matrix, Sparse_matrix_mult_complex_meduim_time_perfomance) {
+TEST(Class_Matrix, Sparse_matrix_mult_complex_large_time_perfomance) {
     clock_t start, end;
     double seq_time, std_time;
     int size = 1000;
@@ -299,7 +299,7 @@ TEST(Class_Matrix, Sparse_matrix_mult_complex_meduim_time_perfomance) {
     EXPECT_TRUE(C_seq == C_std);
 }
 
-TEST(Class_Matrix, Sparse_matrix_mult_complex_meduim_time_perfomance) {
+TEST(Class_Matrix, Sparse_matrix_mult_complex_ext_large_time_perfomance) {
     clock_t start, end;
     double seq_time, std_time;
     int size = 2500;
