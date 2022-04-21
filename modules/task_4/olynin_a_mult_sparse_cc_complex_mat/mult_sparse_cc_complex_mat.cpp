@@ -1,6 +1,8 @@
 // Copyright 2022 Olynin Alexander
-#include "thread"
-#include "../../modules/task_3/olynin_a_mult_sparse_cc_complex_mat/mult_sparse_cc_complex_mat.h"
+#include "../../../3rdparty/unapproved/unapproved.h"
+#include "./mult_sparse_cc_complex_mat.h"
+
+// using std::vector;
 
 std::vector<Complex> Complex::InitVec(std::vector<double> rls,
                                       std::vector<double> ims) {
@@ -217,9 +219,10 @@ Matrix Matrix::operator*(Matrix B) {
     std::vector<std::thread> threads;
     std::vector<std::vector<Complex>> Entry_col(num_threads);
     std::vector<std::vector<int>> irows_col(num_threads);
-    std::vector<int> counter (A.size);
+    std::vector<int> counter(A.size);
     int thread_index = 0;
-    int group = ceil(static_cast<float>(A.size) / static_cast<float>(num_threads));
+    int group = ceil(static_cast<float>(A.size) /
+                     static_cast<float>(num_threads));
 
     for (int _j = 0; _j < B.size; _j += group) {
         threads.push_back(std::thread([&](int ind, int start, int end) {
@@ -250,7 +253,8 @@ Matrix Matrix::operator*(Matrix B) {
         }, thread_index, _j, fmin(_j + group, B.size)));
         thread_index++;
     }
-    std::for_each(threads.begin(), threads.end(), [](std::thread& _thread) { _thread.join(); });
+    std::for_each(threads.begin(), threads.end(),
+                  [](std::thread& _thread) { _thread.join(); });
 
         std::vector<Complex> EntryRes;
         std::vector<int> irowsres;

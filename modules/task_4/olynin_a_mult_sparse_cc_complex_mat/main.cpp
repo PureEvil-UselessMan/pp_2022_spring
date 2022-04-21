@@ -2,7 +2,7 @@
 #include <gtest/gtest.h>
 #include <time.h>
 #include <vector>
-#include "../../modules/task_3/olynin_a_mult_sparse_cc_complex_mat/mult_sparse_cc_complex_mat.h"
+#include "./mult_sparse_cc_complex_mat.h"
 
 TEST(Class_Complex, Complex_creation) {
     EXPECT_NO_THROW(Complex A(1.2, 2.3));
