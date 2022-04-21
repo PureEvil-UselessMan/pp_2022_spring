@@ -253,7 +253,7 @@ Matrix Matrix::operator*(Matrix B) {
         }, thread_index, _j, fmin(_j + group, B.size)));
         thread_index++;
     }
-    std::for_each(threads.begin(), threads.end(),
+    for_each(threads.begin(), threads.end(),
                   [](std::thread& _thread) { _thread.join(); });
 
         std::vector<Complex> EntryRes;
