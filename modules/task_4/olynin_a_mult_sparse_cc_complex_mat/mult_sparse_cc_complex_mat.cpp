@@ -253,23 +253,24 @@ Matrix Matrix::operator*(Matrix B) {
         }, thread_index, _j, fmin(_j + group, B.size)));
         thread_index++;
     }
-    for_each(threads.begin(), threads.end(),
-                  [](std::thread& _thread) { _thread.join(); });
+    for (size_t i = 0; i < threads.size(); i++) {
+        threads[i].join();
+    }
 
-        std::vector<Complex> EntryRes;
-        std::vector<int> irowsres;
-        for (int i = 0; i < num_threads; i++) {
-            EntryRes.insert(EntryRes.end(),
-                            Entry_col[i].begin(), Entry_col[i].end());
-            irowsres.insert(irowsres.end(),
-                            irows_col[i].begin(), irows_col[i].end());
-        }
-        std::vector<int> shtcolsres = { 1 };
-        int sum = 1;
-        for (int i = 0; i < A.size; i++) {
-            sum += counter[i];
-            shtcolsres.push_back(sum);
-        }
+    std::vector<Complex> EntryRes;
+    std::vector<int> irowsres;
+    for (int i = 0; i < num_threads; i++) {
+        EntryRes.insert(EntryRes.end(),
+                        Entry_col[i].begin(), Entry_col[i].end());
+        irowsres.insert(irowsres.end(),
+                        irows_col[i].begin(), irows_col[i].end());
+    }
+    std::vector<int> shtcolsres = { 1 };
+    int sum = 1;
+    for (int i = 0; i < A.size; i++) {
+        sum += counter[i];
+        shtcolsres.push_back(sum);
+    }
 
     Matrix Ans(A.size, EntryRes.size(), EntryRes, irowsres, shtcolsres);
     return Ans;
